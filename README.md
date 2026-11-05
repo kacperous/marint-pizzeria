@@ -2,6 +2,8 @@
 
 Strona-wizytówka fikcyjnej pizzerii neapolitańskiej **Przędza** z Łodzi (Księży Młyn). Projekt zaliczeniowy. Nazwa, adres, NIP/KRS, ceny i opinie są wymyślone.
 
+**Strona online:** https://kacperous.github.io/marint-pizzeria/ (publikowana automatycznie przez GitHub Actions po każdym pushu na `main`).
+
 ## Technologia
 
 - [Astro](https://astro.build) 7, wynik w postaci statycznego HTML/CSS z małymi skryptami (bez frameworka po stronie przeglądarki).
