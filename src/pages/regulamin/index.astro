@@ -1,0 +1,27 @@
+---
+import Doc from '../../layouts/Doc.astro';
+import { site, delivery } from '../../data/site';
+---
+
+<Doc title="Regulamin" updated="1 listopada 2026">
+  <h2>Zamówienia</h2>
+  <ol>
+    <li>Zamówienia przyjmujemy telefonicznie pod numerem {site.phone} oraz przez aplikacje partnerskie, do 30 minut przed zamknięciem lokalu.</li>
+    <li>Minimalna wartość zamówienia z dowozem wynosi {delivery.minimum} zł. Dostawa kosztuje {delivery.fee} zł, a od {delivery.freeFrom} zł jest bezpłatna.</li>
+    <li>Dowozimy w strefie: {delivery.zone}. Szacowany czas dostawy to {delivery.time}.</li>
+    <li>Płatność: {delivery.payments}.</li>
+  </ol>
+
+  <h2>Rezerwacje</h2>
+  <ol>
+    <li>Rezerwację można złożyć przez formularz na stronie lub telefonicznie, najpóźniej 30 minut przed wybraną godziną i najwcześniej 60 dni wcześniej.</li>
+    <li>Stolik czekamy 15 minut od zarezerwowanej godziny.</li>
+    <li>Rezerwacje dla grup powyżej 10 osób przyjmujemy wyłącznie telefonicznie.</li>
+  </ol>
+
+  <h2>Promocje</h2>
+  <p>Promocje nie łączą się ze sobą. Rabat −15% dotyczy zamówień telefonicznych z odbiorem osobistym. Szczegóły aktualnych promocji są w sekcji Promocje na stronie głównej.</p>
+
+  <h2>Reklamacje</h2>
+  <p>Reklamacje przyjmujemy na miejscu, telefonicznie lub e-mailem ({site.email}). Odpowiadamy w ciągu 14 dni.</p>
+</Doc>

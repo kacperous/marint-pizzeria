@@ -1,0 +1,507 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-05T15:34:45+00:00",
+  "title": "Design System: Przędza",
+  "extensions": {
+    "colorMeta": {
+      "brick": {
+        "role": "primary",
+        "displayName": "Fired Brick",
+        "canonical": "#9e3a22",
+        "tonalRamp": [
+          "oklch(15% 0.083 34.7)",
+          "oklch(25% 0.138 34.7)",
+          "oklch(35% 0.138 34.7)",
+          "oklch(47% 0.138 34.7)",
+          "oklch(59% 0.138 34.7)",
+          "oklch(71% 0.138 34.7)",
+          "oklch(83% 0.138 34.7)",
+          "oklch(95% 0.083 34.7)"
+        ]
+      },
+      "brick-joint": {
+        "role": "primary",
+        "displayName": "Brick Joint",
+        "canonical": "#7d2c19",
+        "tonalRamp": [
+          "oklch(15% 0.070 34.5)",
+          "oklch(25% 0.117 34.5)",
+          "oklch(35% 0.117 34.5)",
+          "oklch(47% 0.117 34.5)",
+          "oklch(59% 0.117 34.5)",
+          "oklch(71% 0.117 34.5)",
+          "oklch(83% 0.117 34.5)",
+          "oklch(95% 0.070 34.5)"
+        ]
+      },
+      "brick-tile": {
+        "role": "primary",
+        "displayName": "Brick Tile Average",
+        "canonical": "#80412d",
+        "tonalRamp": [
+          "oklch(15% 0.056 38.3)",
+          "oklch(25% 0.093 38.3)",
+          "oklch(35% 0.093 38.3)",
+          "oklch(47% 0.093 38.3)",
+          "oklch(59% 0.093 38.3)",
+          "oklch(71% 0.093 38.3)",
+          "oklch(83% 0.093 38.3)",
+          "oklch(95% 0.056 38.3)"
+        ]
+      },
+      "soot": {
+        "role": "neutral",
+        "displayName": "Soot",
+        "canonical": "#1a1512",
+        "tonalRamp": [
+          "oklch(15% 0.006 52.9)",
+          "oklch(25% 0.010 52.9)",
+          "oklch(35% 0.010 52.9)",
+          "oklch(47% 0.010 52.9)",
+          "oklch(59% 0.010 52.9)",
+          "oklch(71% 0.010 52.9)",
+          "oklch(83% 0.010 52.9)",
+          "oklch(95% 0.006 52.9)"
+        ]
+      },
+      "soot-2": {
+        "role": "neutral",
+        "displayName": "Soot Ledge",
+        "canonical": "#2a221d",
+        "tonalRamp": [
+          "oklch(15% 0.009 53.9)",
+          "oklch(25% 0.015 53.9)",
+          "oklch(35% 0.015 53.9)",
+          "oklch(47% 0.015 53.9)",
+          "oklch(59% 0.015 53.9)",
+          "oklch(71% 0.015 53.9)",
+          "oklch(83% 0.015 53.9)",
+          "oklch(95% 0.009 53.9)"
+        ]
+      },
+      "iron": {
+        "role": "secondary",
+        "displayName": "Cast-Iron Green",
+        "canonical": "#2d4a3e",
+        "tonalRamp": [
+          "oklch(15% 0.024 166.3)",
+          "oklch(25% 0.041 166.3)",
+          "oklch(35% 0.041 166.3)",
+          "oklch(47% 0.041 166.3)",
+          "oklch(59% 0.041 166.3)",
+          "oklch(71% 0.041 166.3)",
+          "oklch(83% 0.041 166.3)",
+          "oklch(95% 0.024 166.3)"
+        ]
+      },
+      "iron-2": {
+        "role": "secondary",
+        "displayName": "Deep Cast Iron",
+        "canonical": "#243d33",
+        "tonalRamp": [
+          "oklch(15% 0.022 167.0)",
+          "oklch(25% 0.036 167.0)",
+          "oklch(35% 0.036 167.0)",
+          "oklch(47% 0.036 167.0)",
+          "oklch(59% 0.036 167.0)",
+          "oklch(71% 0.036 167.0)",
+          "oklch(83% 0.036 167.0)",
+          "oklch(95% 0.022 167.0)"
+        ]
+      },
+      "ochre": {
+        "role": "tertiary",
+        "displayName": "Sign Ochre",
+        "canonical": "#e0a82e",
+        "tonalRamp": [
+          "oklch(15% 0.087 81.9)",
+          "oklch(25% 0.144 81.9)",
+          "oklch(35% 0.144 81.9)",
+          "oklch(47% 0.144 81.9)",
+          "oklch(59% 0.144 81.9)",
+          "oklch(71% 0.144 81.9)",
+          "oklch(83% 0.144 81.9)",
+          "oklch(95% 0.087 81.9)"
+        ]
+      },
+      "ochre-press": {
+        "role": "tertiary",
+        "displayName": "Pressed Ochre",
+        "canonical": "#c99220",
+        "tonalRamp": [
+          "oklch(15% 0.081 79.7)",
+          "oklch(25% 0.136 79.7)",
+          "oklch(35% 0.136 79.7)",
+          "oklch(47% 0.136 79.7)",
+          "oklch(59% 0.136 79.7)",
+          "oklch(71% 0.136 79.7)",
+          "oklch(83% 0.136 79.7)",
+          "oklch(95% 0.081 79.7)"
+        ]
+      },
+      "lime": {
+        "role": "neutral",
+        "displayName": "Lime-Wash",
+        "canonical": "#e4e1d8",
+        "tonalRamp": [
+          "oklch(15% 0.008 91.5)",
+          "oklch(25% 0.013 91.5)",
+          "oklch(35% 0.013 91.5)",
+          "oklch(47% 0.013 91.5)",
+          "oklch(59% 0.013 91.5)",
+          "oklch(71% 0.013 91.5)",
+          "oklch(83% 0.013 91.5)",
+          "oklch(95% 0.008 91.5)"
+        ]
+      },
+      "lime-2": {
+        "role": "neutral",
+        "displayName": "Lime Hairline",
+        "canonical": "#d6d2c6",
+        "tonalRamp": [
+          "oklch(15% 0.010 91.6)",
+          "oklch(25% 0.017 91.6)",
+          "oklch(35% 0.017 91.6)",
+          "oklch(47% 0.017 91.6)",
+          "oklch(59% 0.017 91.6)",
+          "oklch(71% 0.017 91.6)",
+          "oklch(83% 0.017 91.6)",
+          "oklch(95% 0.010 91.6)"
+        ]
+      },
+      "paint": {
+        "role": "neutral",
+        "displayName": "Wall Paint",
+        "canonical": "#ebe7dc",
+        "tonalRamp": [
+          "oklch(15% 0.009 90.2)",
+          "oklch(25% 0.015 90.2)",
+          "oklch(35% 0.015 90.2)",
+          "oklch(47% 0.015 90.2)",
+          "oklch(59% 0.015 90.2)",
+          "oklch(71% 0.015 90.2)",
+          "oklch(83% 0.015 90.2)",
+          "oklch(95% 0.009 90.2)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1a1512",
+        "tonalRamp": [
+          "oklch(15% 0.006 52.9)",
+          "oklch(25% 0.010 52.9)",
+          "oklch(35% 0.010 52.9)",
+          "oklch(47% 0.010 52.9)",
+          "oklch(59% 0.010 52.9)",
+          "oklch(71% 0.010 52.9)",
+          "oklch(83% 0.010 52.9)",
+          "oklch(95% 0.006 52.9)"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#4a403a",
+        "tonalRamp": [
+          "oklch(15% 0.010 52.9)",
+          "oklch(25% 0.017 52.9)",
+          "oklch(35% 0.017 52.9)",
+          "oklch(47% 0.017 52.9)",
+          "oklch(59% 0.017 52.9)",
+          "oklch(71% 0.017 52.9)",
+          "oklch(83% 0.017 52.9)",
+          "oklch(95% 0.010 52.9)"
+        ]
+      },
+      "on-dark-soft": {
+        "role": "neutral",
+        "displayName": "Soft Paint on Dark",
+        "canonical": "#c9c2b4",
+        "tonalRamp": [
+          "oklch(15% 0.012 84.6)",
+          "oklch(25% 0.021 84.6)",
+          "oklch(35% 0.021 84.6)",
+          "oklch(47% 0.021 84.6)",
+          "oklch(59% 0.021 84.6)",
+          "oklch(71% 0.021 84.6)",
+          "oklch(83% 0.021 84.6)",
+          "oklch(95% 0.012 84.6)"
+        ]
+      },
+      "on-brick-soft": {
+        "role": "neutral",
+        "displayName": "Soft Paint on Brick",
+        "canonical": "#f0d9cc",
+        "tonalRamp": [
+          "oklch(15% 0.019 51.5)",
+          "oklch(25% 0.031 51.5)",
+          "oklch(35% 0.031 51.5)",
+          "oklch(47% 0.031 51.5)",
+          "oklch(59% 0.031 51.5)",
+          "oklch(71% 0.031 51.5)",
+          "oklch(83% 0.031 51.5)",
+          "oklch(95% 0.019 51.5)"
+        ]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Field White",
+        "canonical": "#f6f4ee",
+        "tonalRamp": [
+          "oklch(15% 0.005 91.5)",
+          "oklch(25% 0.008 91.5)",
+          "oklch(35% 0.008 91.5)",
+          "oklch(47% 0.008 91.5)",
+          "oklch(59% 0.008 91.5)",
+          "oklch(71% 0.008 91.5)",
+          "oklch(83% 0.008 91.5)",
+          "oklch(95% 0.005 91.5)"
+        ]
+      },
+      "error": {
+        "role": "error",
+        "displayName": "Error Red",
+        "canonical": "#8f1d12",
+        "tonalRamp": [
+          "oklch(15% 0.090 30.0)",
+          "oklch(25% 0.150 30.0)",
+          "oklch(35% 0.150 30.0)",
+          "oklch(47% 0.150 30.0)",
+          "oklch(59% 0.150 30.0)",
+          "oklch(71% 0.150 30.0)",
+          "oklch(83% 0.150 30.0)",
+          "oklch(95% 0.090 30.0)"
+        ]
+      },
+      "error-on-dark": {
+        "role": "error",
+        "displayName": "Error on Dark",
+        "canonical": "#ffb4a3",
+        "tonalRamp": [
+          "oklch(15% 0.055 33.2)",
+          "oklch(25% 0.091 33.2)",
+          "oklch(35% 0.091 33.2)",
+          "oklch(47% 0.091 33.2)",
+          "oklch(59% 0.091 33.2)",
+          "oklch(71% 0.091 33.2)",
+          "oklch(83% 0.091 33.2)",
+          "oklch(95% 0.055 33.2)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Wall Title",
+        "purpose": "Section titles painted onto brick sections, masked by the paint texture; the facade sign is a larger height-capped variant used once."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles on soot, iron and lime grounds."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card, group and form titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text in the humanist sans."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Section intros, max 38ch."
+      },
+      "label": {
+        "displayName": "Sign Label",
+        "purpose": "Buttons, photo captions, open status."
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Prices and hours in tabular lining figures, never wrapping."
+      }
+    },
+    "shadows": [
+      {
+        "name": "wall-mount",
+        "value": "0 0.75rem 1.5rem -0.75rem rgb(26 21 18 / 0.6)",
+        "purpose": "Windows, posted cards and the map poster mounted on the wall. Never on controls."
+      },
+      {
+        "name": "joint-ring",
+        "value": "0 0 0 3px #7d2c19",
+        "purpose": "Mortar ring around a factory window frame."
+      },
+      {
+        "name": "muntin",
+        "value": "inset 0 0 0 3px #2d4a3e",
+        "purpose": "Window bars drawn over a photo, 3 x 2 grid."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "All state transitions."
+      },
+      {
+        "name": "state",
+        "value": "160ms",
+        "purpose": "Button and field colour, border and press transitions."
+      },
+      {
+        "name": "bar-slide",
+        "value": "260ms",
+        "purpose": "Mobile action bar sliding up from the bottom edge."
+      },
+      {
+        "name": "process-fill",
+        "value": "animation-timeline: view()",
+        "purpose": "Process axis fill and step markers driven by scroll; off under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "30rem"
+      },
+      {
+        "name": "nav-collapse",
+        "value": "52rem"
+      },
+      {
+        "name": "promos-3col",
+        "value": "56rem"
+      },
+      {
+        "name": "two-column",
+        "value": "60rem"
+      },
+      {
+        "name": "tel-icon-only",
+        "value": "64rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ochre stencilled action; the only ochre fill in the system.",
+      "html": "<button class=\"ds-btn\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z\"/></svg>Zadzwoń</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:.5rem;min-height:3rem;padding:.625rem 1.25rem;border:2px solid #e0a82e;border-radius:0;background:#e0a82e;color:#1a1512;font-family:'Big Shoulders Display Variable','Arial Narrow',sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:.04em;line-height:1;text-transform:uppercase;cursor:pointer;transition:background-color 160ms cubic-bezier(.16,1,.3,1),border-color 160ms cubic-bezier(.16,1,.3,1),transform 160ms cubic-bezier(.16,1,.3,1)}.ds-btn:hover{background:#c99220;border-color:#c99220}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:3px solid #e0a82e;outline-offset:3px}"
+    },
+    {
+      "name": "Line Button",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Secondary action on dark grounds; inherits text colour for its border.",
+      "html": "<div class=\"ds-ground\"><button class=\"ds-btn-line\">Zobacz kartę</button></div>",
+      "css": ".ds-ground{background:#1a1512;padding:1.5rem;color:#ebe7dc}.ds-btn-line{display:inline-flex;align-items:center;min-height:3rem;padding:.625rem 1.25rem;border:2px solid currentColor;border-radius:0;background:transparent;color:inherit;font-family:'Big Shoulders Display Variable','Arial Narrow',sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:.04em;line-height:1;text-transform:uppercase;cursor:pointer;transition:background-color 160ms cubic-bezier(.16,1,.3,1)}.ds-btn-line:hover{background:rgb(255 255 255 / .08)}.ds-btn-line:focus-visible{outline:3px solid #e0a82e;outline-offset:3px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Square ink-bordered field on lime-wash; brick focus ring.",
+      "html": "<div class=\"ds-lime\"><label class=\"ds-field\"><span>Imię i nazwisko</span><input class=\"ds-input\" placeholder=\"np. Anna Kowalska\"></label></div>",
+      "css": ".ds-lime{background:#e4e1d8;padding:1.5rem;color:#1a1512;font-family:'Source Sans 3 Variable','Segoe UI',sans-serif;}.ds-field{display:grid;gap:.375rem;font-weight:600;font-size:1rem}.ds-input{font:inherit;font-weight:400;font-size:1.0625rem;min-height:3rem;padding:.625rem .75rem;border:2px solid #1a1512;border-radius:0;background:#f6f4ee;color:#1a1512;transition:background-color 160ms cubic-bezier(.16,1,.3,1)}.ds-input::placeholder{color:#6b625b}.ds-input:hover{background:#fff}.ds-input:focus-visible{outline:3px solid #9e3a22;outline-offset:1px;background:#fff}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "Sticky soot bar with brick-joint rule, sign-face wordmark, brick hover underline.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-mark\" href=\"#\">Przędza</a><ul><li><a href=\"#\">Karta</a></li><li><a href=\"#\">Promocje</a></li><li><a href=\"#\">Kontakt</a></li></ul></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:1.5rem;min-height:4rem;padding:0 1.5rem;background:#1a1512;border-bottom:3px solid #7d2c19;font-family:'Source Sans 3 Variable','Segoe UI',sans-serif;}.ds-mark{font-family:'Big Shoulders Display Variable','Arial Narrow',sans-serif;font-size:1.875rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:#ebe7dc;line-height:1}.ds-nav ul{display:flex;gap:.25rem;margin:0 0 0 auto;padding:0;list-style:none}.ds-nav ul a{display:block;padding:.5rem .75rem;font-weight:600;text-decoration:none;color:#ebe7dc}.ds-nav ul a:hover{text-decoration:underline;text-decoration-color:#9e3a22;text-decoration-thickness:3px;text-underline-offset:.18em}.ds-nav a:focus-visible{outline:3px solid #e0a82e;outline-offset:3px}"
+    },
+    {
+      "name": "Woven Price Tag",
+      "kind": "chip",
+      "refersTo": "price-tag",
+      "description": "Brick label with an inset dashed stitch; menu prices.",
+      "html": "<div class=\"ds-lime2\"><span class=\"ds-name\">Margherita</span><span class=\"ds-dots\"></span><span class=\"ds-tag\">32 zł</span></div>",
+      "css": ".ds-lime2{display:flex;align-items:baseline;gap:.75rem;background:#e4e1d8;padding:1.5rem;color:#1a1512}.ds-name{font-family:'Big Shoulders Display Variable','Arial Narrow',sans-serif;font-size:1.625rem;font-weight:800;letter-spacing:.02em;text-transform:uppercase}.ds-dots{flex:1;border-bottom:2px dotted #a39c90;translate:0 -.3rem}.ds-tag{padding:.25rem .625rem;background:#9e3a22;color:#ebe7dc;font-family:'Big Shoulders Display Variable','Arial Narrow',sans-serif;font-size:1.25rem;font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap;outline:1px dashed rgb(235 231 220 / .7);outline-offset:-4px}"
+    },
+    {
+      "name": "Posted Card",
+      "kind": "card",
+      "refersTo": "posted-card",
+      "description": "Paint slab with brick-joint top edge, mounted on the brick wall.",
+      "html": "<div class=\"ds-wall\"><article class=\"ds-card\"><h3>Lunch w tygodniu</h3><p class=\"ds-big\">42 zł</p><p>Pizza i lemoniada, pn–pt 12:00–15:00.</p></article></div>",
+      "css": ".ds-wall{background:#80412d;padding:2rem}.ds-card{display:grid;gap:.25rem;max-width:20rem;padding:1.5rem 2rem 1.75rem;background:#ebe7dc;color:#1a1512;border-top:.5rem solid #7d2c19;box-shadow:0 .75rem 1.5rem -.75rem rgb(26 21 18 / .6);font-family:'Source Sans 3 Variable','Segoe UI',sans-serif;}.ds-card h3{margin:0;font-family:'Big Shoulders Display Variable','Arial Narrow',sans-serif;font-size:2.25rem;font-weight:900;line-height:.95;text-transform:uppercase}.ds-big{margin:0;font-family:'Big Shoulders Display Variable','Arial Narrow',sans-serif;font-size:4rem;font-weight:900;line-height:.9;color:#9e3a22;font-variant-numeric:tabular-nums lining-nums}.ds-card p{margin:0}"
+    },
+    {
+      "name": "Factory Window",
+      "kind": "custom",
+      "refersTo": "window-frame",
+      "description": "Photo behind a cast-iron frame with 3 x 2 muntins and a brick-joint ring.",
+      "html": "<div class=\"ds-wall2\"><figure class=\"ds-win\"><div class=\"ds-pane\"></div><div class=\"ds-bars\"><i></i><i></i><i></i><i></i><i></i><i></i></div></figure></div>",
+      "css": ".ds-wall2{background:#80412d;padding:2rem}.ds-win{position:relative;margin:0;width:14rem;height:16rem;overflow:hidden;border:.625rem solid #2d4a3e;background:#1a1512;box-shadow:0 0 0 3px #7d2c19,0 .75rem 1.5rem -.75rem rgb(26 21 18 / .55)}.ds-pane{position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,#e0a82e 0 12%,#9e3a22 30%,#1a1512 70%)}.ds-bars{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)}.ds-bars i{box-shadow:inset 0 0 0 3px #2d4a3e}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Oven in the Spinning Mill",
+    "overview": "A Neapolitan wood-fired oven set inside a red-brick Łódź textile mill. The site speaks the language of the building, not of an Italian costume: whole sections are brick wall, headings are painted onto that wall in a condensed sign-writer's grotesque, photographs sit behind cast-iron factory window bars, and prices read like numbers on a woven label. It rejects both the cream-and-terracotta \"rustic Italy\" and the dark neon loft.\n\nSections are full-bleed bands of material (brick, soot, cast iron, lime-wash), stacked like the courses of a facade. Density is moderate and phone-first: big sign type, short lines, one clear action colour. Depth comes from material and thick structural borders, not from floating UI.",
+    "keyCharacteristics": [
+      "Real photographic brick as a section field, with sign titles masked by the same photograph so paint holds on the brick faces and drops out in the joints.",
+      "One condensed uppercase sign face plus one humanist text sans.",
+      "Spacing in multiples of a single brick \"course\" (1.5rem).",
+      "Square corners everywhere; thick iron and brick-joint borders carry structure.",
+      "Ochre is reserved for actions."
+    ],
+    "rules": [
+      {
+        "name": "The Ochre Is for Doing Rule",
+        "body": "Ochre fills only things that act: buttons, focus, selection. It never decorates a heading, a card or a background.",
+        "section": "colors"
+      },
+      {
+        "name": "The Whole-Wall Rule",
+        "body": "Brick is a section field from edge to edge, never a small swatch, a card fill or a wallpaper behind a content box.",
+        "section": "colors"
+      },
+      {
+        "name": "The Cool Lime Rule",
+        "body": "The light ground is lime-wash `#e4e1d8`, not cream. Do not warm it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Sign face for anything that would be painted or stencilled (headings, prices, buttons, numerals, status); text face for anything read in sentences. No third family.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ledger Numbers Rule",
+        "body": "Prices and hours use tabular lining figures (`tnum`, `lnum`) and never wrap.",
+        "section": "typography"
+      },
+      {
+        "name": "The Course Rule",
+        "body": "Every block-level gap is a multiple of the 1.5rem course. If a value is not c1 to c6, it belongs inside a component, not between components.",
+        "section": "layout"
+      },
+      {
+        "name": "The Mounted-Only Rule",
+        "body": "Only things fixed to the wall (windows, posters, map) cast the wall-mount shadow. Interactive controls stay flat.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do build sections as full-bleed bands of one material: brick, soot, iron or lime-wash.",
+      "Do paint brick-section titles with the paint-mask texture aligned to the wall so letters break in the mortar joints.",
+      "Do frame hero photography as a factory window: iron frame, 3 × 2 bars, brick-joint ring.",
+      "Do keep every gap between blocks on the 1.5rem course scale.",
+      "Do set prices in the sign face with tabular lining figures, on a brick tag or a dotted leader.",
+      "Do switch the focus colour by ground: ochre on soot, iron and brick text; brick on lime."
+    ],
+    "donts": [
+      "Don't use ochre for anything that is not an action, focus or selection.",
+      "Don't round corners on surfaces, buttons or fields.",
+      "Don't warm the light ground toward cream or use terracotta-and-cream \"rustic Italy\" styling.",
+      "Don't turn the dark bands into a neon loft: no glow, no saturated light colours on soot.",
+      "Don't put the wall-mount shadow on controls.",
+      "Don't introduce a third typeface or set sentences in the sign face."
+    ]
+  }
+}

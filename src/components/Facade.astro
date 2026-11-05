@@ -1,0 +1,266 @@
+---
+import Window from './Window.astro';
+import Icon from './Icon.astro';
+import { site, hours } from '../data/site';
+import { href } from '../lib/url';
+import oven from '../assets/photos/piec-ogien.jpg';
+import dough from '../assets/photos/kula-ciasta.jpg';
+import margherita from '../assets/photos/margherita.jpg';
+---
+
+<section class="facade brick" aria-labelledby="hero-title">
+  <h1 id="hero-title" class="sign">
+    <span class="sign__name painted">{site.name}</span>
+    <span class="sign__sub">Pizza neapolitańska<span aria-hidden="true"> · </span><br class="sign__br" />piec opalany drewnem</span>
+  </h1>
+  <div class="facade__in wrap">
+
+    <div class="facade__row">
+      <Window class="facade__win facade__win--side" src={dough} alt="Kula ciasta na pizzę w dłoniach pizzaiolo" widths={[320, 480, 640]} sizes="(min-width: 60rem) 22vw, 1px" />
+      <Window class="facade__win facade__win--main" src={oven} alt="Pizza neapolitańska z przypieczonym brzegiem w rozgrzanym piecu opalanym drewnem" widths={[400, 640, 900, 1200]} sizes="(min-width: 60rem) 28vw, 92vw" eager position="50% 60%" />
+      <Window class="facade__win facade__win--side" src={margherita} alt="Margherita z bazylią i mozzarellą na talerzu" widths={[320, 480, 640]} sizes="(min-width: 60rem) 22vw, 1px" position="25% 50%" />
+    </div>
+  </div>
+
+  <div class="plinth soot">
+    <div class="plinth__in wrap">
+      <div class="plinth__info">
+        <p class="status" data-status aria-live="polite">
+          <Icon name="clock" />
+          <span data-status-text>Codziennie od 12:00 (nd od 13:00)</span>
+        </p>
+        <p class="plinth__addr">
+          <Icon name="mapPin" />
+          <a href={href('#kontakt')}>{site.street}, {site.district}, {site.city}</a>
+        </p>
+      </div>
+      <div class="plinth__act">
+        <a class="btn" href={site.phoneHref}><Icon name="phone" />Zadzwoń {site.phone}</a>
+        <a class="btn" href={href('#rezerwacja')}><Icon name="calendar" />Zarezerwuj stolik</a>
+        <a class="plinth__menu" href={href('#karta')}>Zobacz kartę z cenami</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="hours-data" set:html={JSON.stringify(hours)} />
+
+<style>
+  .facade {
+    overflow: hidden;
+  }
+
+  .facade__in {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: var(--c1);
+    padding-block: 0 var(--c2);
+  }
+
+  .sign {
+    display: grid;
+    text-align: center;
+    color: var(--paint);
+    text-shadow: 0 1px 2px rgb(60 20 10 / 0.45);
+  }
+
+  .sign__name {
+    width: 100%;
+    padding-top: calc(var(--c1) + 0.06em);
+    padding-bottom: 0.14em;
+    font-size: clamp(5.25rem, min(24vw, 28vh), 16rem);
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: 0.035em;
+    text-indent: 0.035em;
+    text-shadow: none;
+  }
+
+  .sign__sub {
+    display: block;
+    margin: 0 var(--gutter) var(--c1);
+    font-size: clamp(1.375rem, 2.6vw, 2.125rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.05;
+  }
+
+  .sign__br {
+    display: none;
+  }
+
+  .facade__row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 6vw, 6rem);
+    width: min(100%, 64rem);
+    margin-top: var(--c1);
+  }
+
+  .facade__row :global(.facade__win) {
+    height: clamp(14rem, 30vh, 24rem);
+  }
+
+  .plinth {
+    border-top: 0.75rem solid var(--soot-2);
+  }
+
+  .plinth__in {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--c1) var(--c2);
+    padding-block: var(--c1);
+  }
+
+  .plinth__info {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .status,
+  .plinth__addr {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status {
+    font-family: var(--sign);
+    font-size: 1.625rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .status[data-state='closed'] {
+    color: var(--on-dark-soft);
+  }
+
+  .plinth__addr {
+    color: var(--on-dark-soft);
+  }
+
+  .plinth__act {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+  }
+
+  .plinth__menu {
+    font-weight: 600;
+    padding-block: 0.75rem;
+  }
+
+  @media (min-width: 60.01rem) {
+    .sign__sub {
+      margin-top: 0.5rem;
+    }
+  }
+
+  @media (max-width: 60rem) {
+    .facade__row {
+      grid-template-columns: 1fr;
+      width: min(100%, 26rem);
+    }
+
+    .facade__row :global(.facade__win--side) {
+      display: none;
+    }
+
+    .facade__row :global(.facade__win) {
+      height: clamp(14rem, 34vh, 22rem);
+    }
+
+    .plinth__act {
+      width: 100%;
+    }
+
+    .plinth__act .btn {
+      flex: 1 1 15rem;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .sign__br {
+      display: inline;
+    }
+
+    .sign__sub span {
+      display: none;
+    }
+
+    .sign__sub {
+      font-size: 1.5rem;
+    }
+
+    .status {
+      font-size: 1.375rem;
+    }
+
+    .plinth__menu {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  type Day = { label: string; short: string; open: string; close: string };
+
+  const el = document.querySelector<HTMLElement>('[data-status]');
+  const text = document.querySelector<HTMLElement>('[data-status-text]');
+  const raw = document.getElementById('hours-data')?.textContent;
+
+  const toMin = (t: string) => {
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+  };
+
+  const nowInLodz = () => {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Warsaw',
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    }).formatToParts(new Date());
+    const get = (type: string) => parts.find((p) => p.type === type)?.value ?? '';
+    const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
+    return { day, min: Number(get('hour')) * 60 + Number(get('minute')) };
+  };
+
+  const render = (hours: Day[]) => {
+    if (!el || !text) return;
+    const { day, min } = nowInLodz();
+    const today = hours[day];
+    const open = toMin(today.open);
+    const close = toMin(today.close);
+    let state = 'closed';
+    let msg = '';
+    if (min >= open && min < close) {
+      const left = close - min;
+      state = 'open';
+      msg = left <= 60 ? `Otwarte, zamykamy za ${left} min` : `Otwarte do ${today.close}`;
+    } else if (min < open) {
+      msg = `Zamknięte, otwieramy dziś o ${today.open}`;
+    } else {
+      const next = hours[(day + 1) % 7];
+      msg = `Zamknięte, otwieramy jutro o ${next.open}`;
+    }
+    el.dataset.state = state;
+    text.textContent = msg;
+  };
+
+  if (raw) {
+    try {
+      const hours = JSON.parse(raw) as Day[];
+      render(hours);
+      setInterval(() => render(hours), 60_000);
+    } catch {}
+  }
+</script>

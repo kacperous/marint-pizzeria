@@ -1,0 +1,95 @@
+---
+import Icon from './Icon.astro';
+import { site, photoCredits } from '../data/site';
+import { href } from '../lib/url';
+---
+
+<footer class="foot soot">
+  <div class="wrap foot__grid">
+    <div class="foot__brand">
+      <p class="foot__mark">{site.name}</p>
+      <p>{site.tagline}.<br />{site.street}, {site.postal} {site.city}</p>
+    </div>
+    <div>
+      <h2 class="foot__h">Firma</h2>
+      <p>{site.company}<br />NIP {site.nip}<br />KRS {site.krs}</p>
+    </div>
+    <div>
+      <h2 class="foot__h">Dokumenty</h2>
+      <ul class="foot__list">
+        <li><a href={href('regulamin/')}>Regulamin</a></li>
+        <li><a href={href('polityka-prywatnosci/')}>Polityka prywatności (RODO)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="foot__h">Obserwuj</h2>
+      <ul class="foot__list foot__social">
+        <li><a href={site.instagram} rel="noopener" target="_blank"><Icon name="instagram" />Instagram</a></li>
+        <li><a href={site.facebook} rel="noopener" target="_blank"><Icon name="facebook" />Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot__fine">
+    <p>
+      Projekt zaliczeniowy (Marketing, Zadanie 2). Pizzeria Przędza, jej adres, dane rejestrowe, ceny i opinie są fikcyjne.
+    </p>
+    <p>
+      Zdjęcia: Unsplash ({photoCredits.map((c) => c.author).join(', ')}).
+    </p>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    padding-block: var(--c3) calc(var(--c3) + env(safe-area-inset-bottom));
+    font-size: 1rem;
+    color: var(--on-dark-soft);
+  }
+
+  .foot__grid {
+    display: grid;
+    gap: var(--c2) var(--c3);
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+
+  .foot__mark {
+    font-family: var(--sign);
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--paint);
+    margin-bottom: 0.5rem;
+  }
+
+  .foot__h {
+    font-size: 1.25rem;
+    color: var(--paint);
+    margin-bottom: 0.5rem;
+  }
+
+  .foot__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .foot__list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+  }
+
+  .foot__fine {
+    margin-top: var(--c3);
+    padding-top: var(--c1);
+    border-top: 1px solid var(--soot-2);
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+</style>

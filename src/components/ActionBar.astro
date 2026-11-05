@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { href } from '../lib/url';
+---
+
+<div class="bar soot" data-bar>
+  <a class="btn" href={site.phoneHref}><Icon name="phone" />Zadzwoń</a>
+  <a class="btn btn--line" href={href('#rezerwacja')}><Icon name="calendar" />Stolik</a>
+</div>
+
+<style>
+  .bar {
+    display: none;
+  }
+
+  @media (max-width: 52rem) {
+    .bar {
+      position: fixed;
+      inset: auto 0 0;
+      z-index: 40;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      padding: 0.5rem var(--gutter) calc(0.5rem + env(safe-area-inset-bottom));
+      border-top: 3px solid var(--brick-joint);
+      translate: 0 110%;
+      transition: translate 260ms var(--ease-out);
+    }
+
+    .bar[data-show] {
+      translate: 0 0;
+    }
+
+    :global(body) {
+      padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-bar]');
+  const hero = document.querySelector('.facade');
+  const book = document.getElementById('rezerwacja');
+  if (bar && hero && 'IntersectionObserver' in window) {
+    const seen = new Map<Element, boolean>([[hero, true], ...(book ? [[book, false] as [Element, boolean]] : [])]);
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) seen.set(e.target, e.isIntersecting);
+      const show = !seen.get(hero) && !(book && seen.get(book));
+      bar.toggleAttribute('data-show', show);
+      bar.inert = !show;
+    });
+    io.observe(hero);
+    if (book) io.observe(book);
+    bar.inert = true;
+  }
+</script>

@@ -1,0 +1,22 @@
+---
+import Doc from '../../layouts/Doc.astro';
+import { site } from '../../data/site';
+---
+
+<Doc title="Polityka prywatności" updated="1 listopada 2026">
+  <h2>Kto przetwarza dane</h2>
+  <p>Administratorem danych jest {site.company}, {site.street}, {site.postal} {site.city}, NIP {site.nip}. Kontakt w sprawie danych: {site.email}.</p>
+
+  <h2>Jakie dane i po co</h2>
+  <ul>
+    <li><strong>Rezerwacja stolika:</strong> imię i nazwisko, telefon, data, godzina, liczba osób i uwagi. Używamy ich tylko do obsługi rezerwacji (art. 6 ust. 1 lit. b RODO) i usuwamy 30 dni po wizycie.</li>
+    <li><strong>Newsletter:</strong> adres e-mail, na podstawie Twojej zgody (art. 6 ust. 1 lit. a RODO). Przechowujemy go do czasu wypisania się.</li>
+    <li><strong>Opinie:</strong> imię, oceny i treść opinii. W tej wersji strony zapisują się tylko w pamięci Twojej przeglądarki.</li>
+  </ul>
+
+  <h2>Twoje prawa</h2>
+  <p>Masz prawo do dostępu do danych, ich poprawienia, usunięcia, ograniczenia przetwarzania, przeniesienia oraz do wycofania zgody w każdej chwili. Możesz też złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych.</p>
+
+  <h2>Pliki cookies i usługi zewnętrzne</h2>
+  <p>Strona nie używa cookies analitycznych ani reklamowych, więc nie pokazujemy banera zgody. Mapa dojazdu pochodzi z OpenStreetMap i ładuje się dopiero, gdy przewiniesz do sekcji Kontakt.</p>
+</Doc>

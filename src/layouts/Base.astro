@@ -1,0 +1,43 @@
+---
+import '@fontsource-variable/big-shoulders-display';
+import '@fontsource-variable/source-sans-3';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import { href } from '../lib/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${site.name}: pizza neapolitańska z pieca, Łódź, Księży Młyn`,
+  description = 'Pizzeria Przędza w Łodzi: pizza neapolitańska z pieca opalanego drewnem, ciasto dojrzewające 48 godzin. Karta z cenami, dowóz, rezerwacja stolika.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1a1512" />
+    <link rel="icon" type="image/svg+xml" href={href('favicon.svg')} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+  </head>
+  <body>
+    <a class="skip" href="#tresc">Przejdź do treści</a>
+    <Header />
+    <main id="tresc">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

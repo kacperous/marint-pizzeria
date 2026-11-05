@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Facade from '../components/Facade.astro';
+import Process from '../components/Process.astro';
+import Menu from '../components/Menu.astro';
+import Promos from '../components/Promos.astro';
+import Order from '../components/Order.astro';
+import Reviews from '../components/Reviews.astro';
+import Newsletter from '../components/Newsletter.astro';
+import Contact from '../components/Contact.astro';
+import ActionBar from '../components/ActionBar.astro';
+import { site, hours, rosse } from '../data/site';
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: site.name,
+  servesCuisine: 'Pizza neapolitańska',
+  priceRange: '29–52 zł',
+  telephone: '+48426301848',
+  email: site.email,
+  acceptsReservations: true,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.street.replace('ul. ', ''),
+    postalCode: site.postal,
+    addressLocality: site.city,
+    addressCountry: 'PL',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lon },
+  openingHoursSpecification: hours.map((d, i) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][i],
+    opens: d.open,
+    closes: d.close,
+  })),
+  hasMenu: { '@type': 'Menu', hasMenuItem: rosse.slice(0, 3).map((p) => ({ '@type': 'MenuItem', name: p.name, offers: { '@type': 'Offer', price: p.price, priceCurrency: 'PLN' } })) },
+};
+---
+
+<Base>
+  <Facade />
+  <Process />
+  <Menu />
+  <Promos />
+  <Order />
+  <Reviews />
+  <Newsletter />
+  <Contact />
+  <ActionBar />
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</Base>

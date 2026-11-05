@@ -1,0 +1,221 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { href } from '../lib/url';
+
+const links = [
+  { label: 'Karta', to: '#karta' },
+  { label: 'Promocje', to: '#promocje' },
+  { label: 'Dowóz', to: '#zamow' },
+  { label: 'Opinie', to: '#opinie' },
+  { label: 'Kontakt', to: '#kontakt' },
+];
+---
+
+<header class="top soot">
+  <div class="top__in wrap">
+    <a class="mark" href={href()} aria-label={`${site.name}, strona główna`}>{site.name}</a>
+    <nav class="nav" id="nav" aria-label="Główna">
+      <ul>
+        {links.map((l) => <li><a href={href(l.to)}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="top__act">
+      <a class="top__tel" href={site.phoneHref}>
+        <Icon name="phone" />
+        <span class="top__tel-num">{site.phone}</span>
+      </a>
+      <a class="btn top__book" href={href('#rezerwacja')}>Zarezerwuj</a>
+      <button class="top__toggle" type="button" aria-expanded="false" aria-controls="nav">
+        <span class="top__open"><Icon name="menu" /></span>
+        <span class="top__close"><Icon name="x" /></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 3px solid var(--brick-joint);
+  }
+
+  .top__in {
+    display: flex;
+    align-items: center;
+    gap: var(--c1);
+    min-height: 4rem;
+  }
+
+  .mark {
+    font-family: var(--sign);
+    font-size: 1.875rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+    color: var(--paint);
+  }
+
+  .nav {
+    margin-inline-start: auto;
+  }
+
+  .nav ul {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--paint);
+  }
+
+  .nav a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--brick);
+    text-decoration-thickness: 3px;
+  }
+
+  .top__act {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .top__tel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding-inline: 0.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .top__tel:hover .top__tel-num {
+    text-decoration: underline;
+  }
+
+  .top__toggle {
+    display: none;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 2px solid var(--paint);
+    background: transparent;
+    color: var(--paint);
+    cursor: pointer;
+  }
+
+  .top__toggle .top__open {
+    display: flex;
+  }
+
+  .top__toggle .top__close,
+  .top__toggle[aria-expanded='true'] .top__open {
+    display: none;
+  }
+
+  .top__toggle[aria-expanded='true'] .top__close {
+    display: flex;
+  }
+
+  @media (max-width: 64rem) {
+    .top__tel-num {
+      display: none;
+    }
+
+    .top__tel {
+      width: 3rem;
+      justify-content: center;
+      border: 2px solid var(--paint);
+    }
+  }
+
+  @media (max-width: 52rem) {
+    .top__in {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      min-height: 3.75rem;
+    }
+
+    .top__act {
+      margin-inline-start: auto;
+      gap: 0.5rem;
+    }
+
+    .top__book {
+      display: none;
+    }
+
+    .top__toggle {
+      display: inline-flex;
+    }
+
+    .nav {
+      order: 3;
+      flex-basis: 100%;
+      display: none;
+      margin: 0;
+    }
+
+    .nav[data-open] {
+      display: block;
+    }
+
+    .nav ul {
+      flex-direction: column;
+      gap: 0;
+      padding-block: 0.25rem 1rem;
+    }
+
+    .nav li + li {
+      border-top: 1px solid var(--soot-2);
+    }
+
+    .nav a {
+      padding: 0.875rem 0;
+      font-family: var(--sign);
+      font-size: 1.625rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.top__toggle');
+  const nav = document.getElementById('nav');
+  if (toggle && nav) {
+    const set = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.toggleAttribute('data-open', open);
+    };
+    toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+    nav.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) set(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>

@@ -1,0 +1,128 @@
+---
+import { href } from '../lib/url';
+---
+
+<section class="news soot section" aria-labelledby="news-title">
+  <div class="wrap news__grid">
+    <div class="news__copy">
+      <h2 id="news-title">Pizza miesiąca w skrzynce</h2>
+      <p class="lead">Raz w miesiącu piszemy, co nowego wjeżdża do pieca, i dorzucamy kod na −10% na pierwszą sezonową pizzę. Nic więcej.</p>
+    </div>
+    <form class="news__form" novalidate data-news>
+      <div class="field">
+        <label for="n-email">Adres e-mail</label>
+        <div class="news__row">
+          <input class="input" id="n-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ty@przyklad.pl" aria-describedby="n-email-err" />
+          <button class="btn" type="submit">Zapisz mnie</button>
+        </div>
+        <p class="error-msg news__err" id="n-email-err" aria-live="polite"></p>
+      </div>
+      <label class="check">
+        <input type="checkbox" name="consent" aria-describedby="n-consent-err" />
+        <span>Chcę dostawać newsletter Przędzy. Wypiszę się jednym kliknięciem. <a href={href('polityka-prywatnosci/')}>Polityka prywatności</a>.</span>
+      </label>
+      <p class="error-msg news__err" id="n-consent-err" aria-live="polite"></p>
+      <p class="news__ok" data-news-ok aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .news {
+    border-top: 0.75rem solid var(--soot-2);
+  }
+
+  .news__grid {
+    display: grid;
+    gap: var(--c2) var(--c4);
+    align-items: end;
+  }
+
+  .news__copy {
+    display: grid;
+    gap: var(--c1);
+  }
+
+  .news__copy h2 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .news__copy .lead {
+    color: var(--on-dark-soft);
+  }
+
+  .news__form {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .news__form .check a {
+    color: var(--paint);
+  }
+
+  .news__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .news__row .input {
+    flex: 1 1 14rem;
+    border-color: var(--paint);
+  }
+
+  .news__row .btn {
+    flex: 0 0 auto;
+  }
+
+  .news__err {
+    color: var(--error-on-dark);
+  }
+
+  .news__ok {
+    font-weight: 700;
+    color: var(--paint);
+  }
+
+  .news__ok:empty {
+    display: none;
+  }
+
+  .news .check input {
+    accent-color: var(--ochre);
+  }
+
+  @media (min-width: 60rem) {
+    .news__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .news__row .btn {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-news]');
+  const ok = document.querySelector<HTMLElement>('[data-news-ok]');
+  if (form && ok) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = form.elements.namedItem('email') as HTMLInputElement;
+      const consent = form.elements.namedItem('consent') as HTMLInputElement;
+      const emailErr = document.getElementById('n-email-err')!;
+      const consentErr = document.getElementById('n-consent-err')!;
+      const emailBad = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
+      emailErr.textContent = emailBad ? 'Sprawdź adres e-mail, np. ola@poczta.pl.' : '';
+      consentErr.textContent = consent.checked ? '' : 'Zaznacz zgodę, żebyśmy mogli wysyłać newsletter.';
+      email.setAttribute('aria-invalid', String(emailBad));
+      if (emailBad) return email.focus();
+      if (!consent.checked) return consent.focus();
+      ok.textContent = `Zapisane: ${email.value.trim()}. Pierwszy list przyjdzie na początku miesiąca. (Wersja demonstracyjna, adres nigdzie nie trafia).`;
+      form.reset();
+    });
+  }
+</script>

@@ -1,0 +1,345 @@
+---
+import Icon from './Icon.astro';
+import { reviews, rating } from '../data/site';
+
+const fmt = (iso: string) => new Date(`${iso}T12:00`).toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
+const scales = [
+  { name: 'food', label: 'Jedzenie' },
+  { name: 'service', label: 'Obsługa' },
+];
+---
+
+<section class="reviews lime section" id="opinie" aria-labelledby="rev-title">
+  <div class="wrap rev__grid">
+    <div class="rev__head">
+      <h2 id="rev-title">Opinie gości</h2>
+      <p class="score">
+        <span class="score__num">{rating.average}</span>
+        <span class="score__meta">
+          <span class="stars" aria-hidden="true">{Array.from({ length: 5 }, () => <Icon name="star" />)}</span>
+          <span>średnia z {rating.count} opinii</span>
+        </span>
+      </p>
+      <p class="note">Opinie i oceny są przykładowe, tak jak cała pizzeria.</p>
+    </div>
+
+    <ol class="rev__list" data-rev-list>
+      {
+        reviews.map((r) => (
+          <li class="rev">
+            <blockquote>
+              <p>{r.text}</p>
+            </blockquote>
+            <p class="rev__meta">
+              <strong>{r.author}</strong>
+              <span>{fmt(r.date)}</span>
+            </p>
+            <p class="rev__scores">
+              <span>Jedzenie {r.food}/5</span>
+              <span>Obsługa {r.service}/5</span>
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <form class="rev__form" novalidate data-rev-form aria-labelledby="rev-form-title">
+      <h3 id="rev-form-title">Oceń swoją wizytę</h3>
+      <p class="note">Dwa kliknięcia i jedno zdanie. Każdą ocenę czytamy na odprawie przed zmianą.</p>
+      {
+        scales.map((s) => (
+          <fieldset class="rate" aria-describedby={`r-${s.name}-err`}>
+            <legend>{s.label}</legend>
+            <div class="rate__stars">
+              {[5, 4, 3, 2, 1].map((n) => (
+                <>
+                  <input class="visually-hidden" type="radio" id={`r-${s.name}-${n}`} name={s.name} value={n} />
+                  <label for={`r-${s.name}-${n}`}>
+                    <Icon name="star" />
+                    <span class="visually-hidden">{n} na 5</span>
+                  </label>
+                </>
+              ))}
+            </div>
+            <p class="error-msg" id={`r-${s.name}-err`} aria-live="polite" />
+          </fieldset>
+        ))
+      }
+      <div class="field">
+        <label for="r-author">Imię</label>
+        <input class="input" id="r-author" name="author" autocomplete="given-name" aria-describedby="r-author-err" />
+        <p class="error-msg" id="r-author-err" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="r-text">Co zjadłeś i jak było?</label>
+        <textarea class="input" id="r-text" name="text" rows="3" maxlength="400" aria-describedby="r-text-err"></textarea>
+        <p class="error-msg" id="r-text-err" aria-live="polite"></p>
+      </div>
+      <button class="btn" type="submit">Dodaj opinię</button>
+      <p class="note rev__status" data-rev-status aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .rev__grid {
+    display: grid;
+    gap: var(--c2) var(--c4);
+  }
+
+  .rev__head {
+    display: grid;
+    gap: var(--c1);
+    align-content: start;
+  }
+
+  .score {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .score__num {
+    font-family: var(--sign);
+    font-size: clamp(4.5rem, 10vw, 6.5rem);
+    font-weight: 900;
+    line-height: 0.85;
+  }
+
+  .score__meta {
+    display: grid;
+    gap: 0.25rem;
+    font-weight: 600;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.125rem;
+    color: var(--brick);
+  }
+
+  .stars :global(svg) {
+    fill: currentColor;
+  }
+
+  .rev__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+  }
+
+  .rev__list :global(.rev) {
+    display: grid;
+    gap: 0.5rem;
+    padding-block: var(--c1);
+    border-top: 3px solid var(--ink);
+  }
+
+  .rev__list :global(blockquote) {
+    margin: 0;
+    font-size: clamp(1.1875rem, 1.8vw, 1.375rem);
+    line-height: 1.45;
+    max-width: 52ch;
+  }
+
+  .rev__list :global(.rev__meta) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    font-size: 1rem;
+    color: var(--ink-soft);
+  }
+
+  .rev__list :global(.rev__meta strong) {
+    color: var(--ink);
+  }
+
+  .rev__list :global(.rev__scores) {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  .rev__list :global(.rev__scores span) {
+    padding: 0.125rem 0.5rem;
+    border: 1px solid var(--ink-soft);
+  }
+
+  .rev__form {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    background: var(--paint);
+    border-top: 0.75rem solid var(--iron);
+  }
+
+  .rev__form h3 {
+    font-size: 2rem;
+  }
+
+  .rate {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .rate legend {
+    padding: 0;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+
+  .rate__stars {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .rate__stars label {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  .rate__stars label :global(svg) {
+    width: 1.75rem;
+    height: 1.75rem;
+    transition: transform 140ms var(--ease-out);
+  }
+
+  .rate__stars input:checked ~ label,
+  .rate__stars label:hover,
+  .rate__stars label:hover ~ label {
+    color: var(--brick);
+  }
+
+  .rate__stars input:checked ~ label :global(svg),
+  .rate__stars label:hover :global(svg),
+  .rate__stars label:hover ~ label :global(svg) {
+    fill: currentColor;
+  }
+
+  .rate__stars label:hover :global(svg) {
+    transform: scale(1.12);
+  }
+
+  .rate__stars input:focus-visible + label {
+    outline: 3px solid var(--brick);
+    outline-offset: -2px;
+  }
+
+  .rev__status:empty {
+    display: none;
+  }
+
+  .rev__form .btn {
+    justify-self: start;
+  }
+
+  @media (min-width: 64rem) {
+    .rev__grid {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 4fr);
+    }
+  }
+
+  @media (min-width: 44rem) and (max-width: 63.99rem) {
+    .rev__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .rev__head {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
+
+<script>
+  type Review = { author: string; text: string; food: number; service: number; date: string };
+
+  const KEY = 'przedza-opinie';
+  const list = document.querySelector<HTMLOListElement>('[data-rev-list]');
+  const form = document.querySelector<HTMLFormElement>('[data-rev-form]');
+  const status = document.querySelector<HTMLElement>('[data-rev-status]');
+
+  const load = (): Review[] => {
+    try {
+      return JSON.parse(localStorage.getItem(KEY) || '[]');
+    } catch {
+      return [];
+    }
+  };
+
+  const save = (items: Review[]) => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(items.slice(0, 10)));
+    } catch {}
+  };
+
+  const render = (r: Review) => {
+    const li = document.createElement('li');
+    li.className = 'rev';
+    const quote = document.createElement('blockquote');
+    const p = document.createElement('p');
+    p.textContent = r.text;
+    quote.append(p);
+    const meta = document.createElement('p');
+    meta.className = 'rev__meta';
+    const who = document.createElement('strong');
+    who.textContent = r.author;
+    const when = document.createElement('span');
+    when.textContent = new Date(r.date).toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · Twoja opinia';
+    meta.append(who, when);
+    const scores = document.createElement('p');
+    scores.className = 'rev__scores';
+    const f = document.createElement('span');
+    f.textContent = `Jedzenie ${r.food}/5`;
+    const s = document.createElement('span');
+    s.textContent = `Obsługa ${r.service}/5`;
+    scores.append(f, s);
+    li.append(quote, meta, scores);
+    return li;
+  };
+
+  if (list && form && status) {
+    for (const r of load().reverse()) list.prepend(render(r));
+
+    const err = (id: string, msg: string) => {
+      const out = document.getElementById(id);
+      if (out) out.textContent = msg;
+      return !msg;
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const author = String(data.get('author') || '').trim();
+      const text = String(data.get('text') || '').trim();
+      const food = Number(data.get('food'));
+      const service = Number(data.get('service'));
+      const ok = [
+        err('r-food-err', food ? '' : 'Zaznacz ocenę jedzenia.'),
+        err('r-service-err', service ? '' : 'Zaznacz ocenę obsługi.'),
+        err('r-author-err', author.length >= 2 ? '' : 'Podaj imię (może być samo imię).'),
+        err('r-text-err', text.length >= 10 ? '' : 'Napisz choć jedno zdanie, min. 10 znaków.'),
+      ];
+      const order = ['food', 'service', 'author', 'text'];
+      const firstBad = ok.indexOf(false);
+      if (firstBad !== -1) {
+        const name = order[firstBad];
+        (form.querySelector<HTMLElement>(`[name="${name}"]`))?.focus();
+        return;
+      }
+      const review: Review = { author, text, food, service, date: new Date().toISOString() };
+      save([review, ...load()]);
+      list.prepend(render(review));
+      form.reset();
+      status.textContent = 'Dziękujemy! Opinia pojawiła się na liście (zapisana tylko w tej przeglądarce).';
+    });
+  }
+</script>

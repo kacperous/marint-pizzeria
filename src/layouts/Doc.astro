@@ -1,0 +1,61 @@
+---
+import Base from './Base.astro';
+import { href } from '../lib/url';
+
+interface Props {
+  title: string;
+  updated: string;
+}
+
+const { title, updated } = Astro.props;
+---
+
+<Base title={`${title} · Przędza, Łódź`} description={`${title} pizzerii Przędza w Łodzi.`}>
+  <article class="doc lime section">
+    <div class="doc__in">
+      <a class="doc__back" href={href()}>Wróć na stronę główną</a>
+      <h1>{title}</h1>
+      <p class="note">Ostatnia zmiana: {updated}. Dokument przykładowy: Przędza to fikcyjna pizzeria z projektu zaliczeniowego.</p>
+      <slot />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .doc__in {
+    width: min(100% - 2 * var(--gutter), 46rem);
+    margin-inline: auto;
+  }
+
+  .doc__back {
+    display: inline-block;
+    margin-bottom: var(--c1);
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: clamp(2.75rem, 8vw, 4.5rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .doc__in :global(h2) {
+    font-size: 1.875rem;
+    margin: var(--c2) 0 0.75rem;
+  }
+
+  .doc__in :global(p),
+  .doc__in :global(li) {
+    max-width: 68ch;
+  }
+
+  .doc__in :global(p + p) {
+    margin-top: 0.75rem;
+  }
+
+  .doc__in :global(ul),
+  .doc__in :global(ol) {
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.375rem;
+  }
+</style>

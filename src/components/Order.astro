@@ -1,0 +1,392 @@
+---
+import Icon from './Icon.astro';
+import { site, delivery, platforms, hours } from '../data/site';
+import { href } from '../lib/url';
+
+const times: string[] = [];
+for (let m = 12 * 60; m <= 21 * 60 + 30; m += 30) {
+  times.push(`${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`);
+}
+---
+
+<section class="order iron section" id="zamow" aria-labelledby="order-title">
+  <div class="wrap order__grid">
+    <div class="order__info">
+      <h2 id="order-title">Zamów do domu</h2>
+      <p class="lead">Najszybciej telefonicznie: przyjmujemy zamówienia do 30 minut przed zamknięciem.</p>
+      <a class="order__tel" href={site.phoneHref}>
+        <Icon name="phone" />
+        <span>{site.phone}</span>
+      </a>
+      <dl class="facts">
+        <div><dt>Strefa dowozu</dt><dd>{delivery.zone}</dd></div>
+        <div><dt>Czas</dt><dd>{delivery.time}</dd></div>
+        <div><dt>Minimum</dt><dd>{delivery.minimum} zł</dd></div>
+        <div><dt>Dostawa</dt><dd>{delivery.fee} zł, od {delivery.freeFrom} zł gratis</dd></div>
+        <div><dt>Płatność</dt><dd>{delivery.payments}</dd></div>
+        <div><dt>Odbiór osobisty</dt><dd>−15% na zamówienie telefoniczne</dd></div>
+      </dl>
+      <div class="platforms">
+        <p>Zamówisz też przez aplikacje:</p>
+        <ul>
+          {
+            platforms.map((p) => (
+              <li>
+                <a href={p.href} rel="noopener" target="_blank">
+                  {p.name}
+                  <Icon name="arrowUpRight" />
+                  <span class="visually-hidden">(otwiera się w nowej karcie)</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="book lime" id="rezerwacja">
+      <h2 class="book__title">Rezerwacja stolika</h2>
+      <p class="book__intro">Sala ma 42 miejsca. Stolik trzymamy 15 minut. Dla grup powyżej 10 osób zadzwoń.</p>
+
+      <form class="book__form" novalidate data-book>
+        <div class="field">
+          <label for="b-name">Imię i nazwisko</label>
+          <input class="input" id="b-name" name="name" autocomplete="name" required aria-describedby="b-name-err" />
+          <p class="error-msg" id="b-name-err" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="b-tel">Telefon</label>
+          <input class="input" id="b-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="np. 600 100 200" required aria-describedby="b-tel-err" />
+          <p class="error-msg" id="b-tel-err" aria-live="polite"></p>
+        </div>
+        <div class="book__row">
+          <div class="field">
+            <label for="b-date">Data</label>
+            <input class="input" id="b-date" name="date" type="date" required aria-describedby="b-date-err" />
+            <p class="error-msg" id="b-date-err" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="b-time">Godzina</label>
+            <select class="input" id="b-time" name="time" required aria-describedby="b-time-err">
+              <option value="">Wybierz</option>
+              {times.map((t) => <option value={t}>{t}</option>)}
+            </select>
+            <p class="error-msg" id="b-time-err" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="b-people">Osoby</label>
+            <select class="input" id="b-people" name="people" required>
+              {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => <option value={n} selected={n === 2}>{n}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="b-note">Uwagi <span class="hint">(opcjonalnie)</span></label>
+          <textarea class="input" id="b-note" name="note" rows="3" placeholder="np. krzesełko dla dziecka, urodziny"></textarea>
+        </div>
+        <div class="field">
+          <label class="check">
+            <input type="checkbox" name="consent" required aria-describedby="b-consent-err" />
+            <span>Zgadzam się na przetwarzanie moich danych w celu obsługi rezerwacji. Szczegóły w <a href={href('polityka-prywatnosci/')}>polityce prywatności</a>.</span>
+          </label>
+          <p class="error-msg" id="b-consent-err" aria-live="polite"></p>
+        </div>
+        <button class="btn book__submit" type="submit"><Icon name="calendar" />Zarezerwuj stolik</button>
+      </form>
+
+      <div class="book__done" data-book-done hidden tabindex="-1">
+        <p class="book__done-title"><Icon name="check" />Rezerwacja przyjęta</p>
+        <p data-book-summary></p>
+        <p class="note">To wersja demonstracyjna strony: formularz nie wysyła danych. W działającej pizzerii potwierdzenie przyszłoby SMS-em.</p>
+        <button class="btn btn--line" type="button" data-book-again>Nowa rezerwacja</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="book-hours" set:html={JSON.stringify(hours)} />
+
+<style>
+  .order__grid {
+    display: grid;
+    gap: var(--c3) var(--c4);
+    align-items: start;
+  }
+
+  .order__info {
+    display: grid;
+    gap: var(--c1);
+  }
+
+  .order__info .lead {
+    color: var(--on-dark-soft);
+  }
+
+  .order__tel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-self: start;
+    font-family: var(--sign);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1;
+    text-decoration: none;
+    color: var(--ochre);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .order__tel:hover span {
+    text-decoration: underline;
+    text-decoration-thickness: 0.06em;
+  }
+
+  .order__tel :global(svg) {
+    width: 0.7em;
+    height: 0.7em;
+  }
+
+  .facts {
+    display: grid;
+    margin: 0;
+    border-top: 1px solid rgb(235 231 220 / 0.25);
+  }
+
+  .facts div {
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 11rem) 1fr;
+    gap: 1rem;
+    padding-block: 0.75rem;
+    border-bottom: 1px solid rgb(235 231 220 / 0.25);
+  }
+
+  .facts dt {
+    font-weight: 700;
+  }
+
+  .facts dd {
+    margin: 0;
+    color: var(--on-dark-soft);
+  }
+
+  .platforms {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .platforms ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .platforms a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.875rem;
+    border: 2px solid rgb(235 231 220 / 0.5);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .platforms a:hover {
+    border-color: var(--paint);
+    background: rgb(255 255 255 / 0.06);
+  }
+
+  .book {
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    border-top: 0.75rem solid var(--brick);
+    scroll-margin-top: 5rem;
+  }
+
+  .book__title {
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+  }
+
+  .book__intro {
+    margin: 0.75rem 0 var(--c1);
+    color: var(--ink-soft);
+  }
+
+  .book__form {
+    display: grid;
+    gap: 1.125rem;
+  }
+
+  .book__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .book__row .field:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .book__submit {
+    justify-self: start;
+    font-size: 1.375rem;
+    min-height: 3.5rem;
+    padding-inline: 1.5rem;
+  }
+
+  .book__done {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: start;
+  }
+
+  .book__done[hidden] {
+    display: none;
+  }
+
+  .book__done-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--sign);
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--iron);
+  }
+
+  @media (min-width: 40rem) {
+    .book__row {
+      grid-template-columns: 1.4fr 1fr 0.8fr;
+    }
+
+    .book__row .field:first-child {
+      grid-column: auto;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .order__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .book {
+      margin-inline: calc(-1 * var(--gutter));
+    }
+
+    .book__submit {
+      width: 100%;
+    }
+
+    .facts div {
+      grid-template-columns: 1fr;
+      gap: 0.125rem;
+    }
+  }
+</style>
+
+<script>
+  type Day = { open: string; close: string };
+
+  const form = document.querySelector<HTMLFormElement>('[data-book]');
+  const done = document.querySelector<HTMLElement>('[data-book-done]');
+  const summary = document.querySelector<HTMLElement>('[data-book-summary]');
+  const again = document.querySelector<HTMLButtonElement>('[data-book-again]');
+  const hours: Day[] = JSON.parse(document.getElementById('book-hours')?.textContent || '[]');
+
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const todayIso = () => {
+    const d = new Date();
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  };
+  const toMin = (t: string) => {
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+  };
+
+  if (form && done && summary && again) {
+    const date = form.elements.namedItem('date') as HTMLInputElement;
+    date.min = todayIso();
+    const max = new Date();
+    max.setDate(max.getDate() + 60);
+    date.max = `${max.getFullYear()}-${pad(max.getMonth() + 1)}-${pad(max.getDate())}`;
+
+    const setError = (name: string, msg: string) => {
+      const input = form.elements.namedItem(name) as HTMLInputElement;
+      const out = document.getElementById(`b-${name}-err`);
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (out) out.textContent = msg;
+      return !msg;
+    };
+
+    const validate = () => {
+      const data = new FormData(form);
+      const name = String(data.get('name') || '').trim();
+      const tel = String(data.get('tel') || '').replace(/[\s-]/g, '');
+      const d = String(data.get('date') || '');
+      const t = String(data.get('time') || '');
+      const checks: [string, string][] = [];
+
+      checks.push(['name', name.length < 2 ? 'Podaj imię i nazwisko, żebyśmy wiedzieli, na kogo czeka stolik.' : '']);
+      checks.push(['tel', !/^(\+?48)?\d{9}$/.test(tel) ? 'Podaj numer telefonu: 9 cyfr, np. 600 100 200.' : '']);
+
+      let dateMsg = '';
+      if (!d) dateMsg = 'Wybierz datę.';
+      else if (d < date.min) dateMsg = 'Ta data już minęła. Wybierz dzisiejszą lub późniejszą.';
+      else if (d > date.max) dateMsg = 'Rezerwujemy najwyżej 60 dni do przodu.';
+      checks.push(['date', dateMsg]);
+
+      let timeMsg = '';
+      if (!t) timeMsg = 'Wybierz godzinę.';
+      else if (d && !dateMsg) {
+        const day = hours[new Date(`${d}T12:00`).getDay()];
+        if (day && (toMin(t) < toMin(day.open) || toMin(t) > toMin(day.close) - 60)) {
+          timeMsg = `Tego dnia przyjmujemy rezerwacje od ${day.open} do ${pad(Math.floor((toMin(day.close) - 60) / 60))}:00.`;
+        }
+        if (!timeMsg && d === todayIso()) {
+          const now = new Date();
+          if (toMin(t) <= now.getHours() * 60 + now.getMinutes() + 30) timeMsg = 'Na dziś przyjmujemy rezerwacje z co najmniej 30-minutowym wyprzedzeniem.';
+        }
+      }
+      checks.push(['time', timeMsg]);
+      checks.push(['consent', data.get('consent') ? '' : 'Bez tej zgody nie możemy przyjąć rezerwacji.']);
+
+      let first: string | null = null;
+      for (const [field, msg] of checks) {
+        if (!setError(field, msg) && !first) first = field;
+      }
+      return first;
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const invalid = validate();
+      if (invalid) {
+        (form.elements.namedItem(invalid) as HTMLElement).focus();
+        return;
+      }
+      const data = new FormData(form);
+      const nice = new Date(`${data.get('date')}T12:00`).toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long' });
+      summary.textContent = `${String(data.get('name')).trim()}, stolik dla ${data.get('people')} os. czeka na Ciebie: ${nice}, godz. ${data.get('time')}.`;
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    });
+
+    form.addEventListener('input', (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.getAttribute('aria-invalid') === 'true') setError(target.name, '');
+    });
+
+    again.addEventListener('click', () => {
+      form.reset();
+      done.hidden = true;
+      form.hidden = false;
+      (form.elements.namedItem('name') as HTMLElement).focus();
+    });
+  }
+</script>

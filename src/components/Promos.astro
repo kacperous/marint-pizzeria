@@ -1,0 +1,115 @@
+---
+import { promos } from '../data/site';
+---
+
+<section class="promos brick section" id="promocje" aria-labelledby="promo-title">
+  <h2 id="promo-title" class="painted bleed wall-title">Promocje</h2>
+  <div class="wrap promos__in">
+    <p class="promos__when">Aktualne w listopadzie 2026. Promocje nie łączą się ze sobą.</p>
+    <ul class="ads">
+      {
+        promos.map((p) => (
+          <li class="ad">
+            <h3 class="ad__title">{p.title}</h3>
+            <p class="ad__price">
+              <span class="price">{p.price}</span>
+              {p.old && (
+                <s class="ad__old">
+                  <span class="visually-hidden">zamiast </span>
+                  {p.old}
+                </s>
+              )}
+            </p>
+            <p class="ad__note">{p.note}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .promos__when {
+    display: inline-block;
+    margin-bottom: var(--c2);
+    padding: 0.25rem 0.625rem;
+    background: var(--soot);
+    color: var(--paint);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .ads {
+    display: grid;
+    gap: var(--c2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ad {
+    display: grid;
+    align-content: start;
+    gap: 0.25rem;
+    padding: var(--c1) clamp(1.25rem, 3vw, 2rem) calc(var(--c1) + 0.25rem);
+    color: var(--soot);
+    background: var(--paint);
+    border-top: 0.5rem solid var(--brick-joint);
+    box-shadow: 0 0.75rem 1.5rem -0.75rem rgb(26 21 18 / 0.6);
+  }
+
+  .ad:nth-child(2) {
+    background: var(--iron);
+    color: var(--paint);
+  }
+
+  .ad__title {
+    font-size: clamp(2rem, 3.4vw, 2.625rem);
+    font-weight: 900;
+  }
+
+  .ad__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .ad__price .price {
+    font-size: clamp(3.5rem, 7vw, 5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--brick);
+  }
+
+  .ad:nth-child(2) .ad__price .price {
+    color: var(--paint);
+  }
+
+  .ad__old {
+    font-family: var(--sign);
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-decoration-thickness: 3px;
+  }
+
+  .ad__note {
+    margin-top: 0.25rem;
+    max-width: 30ch;
+  }
+
+  @media (min-width: 56rem) {
+    .ads {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
+    }
+
+    .ad:nth-child(2) {
+      margin-top: var(--c2);
+    }
+
+    .ad:nth-child(3) {
+      margin-top: var(--c1);
+    }
+  }
+</style>

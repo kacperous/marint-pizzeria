@@ -1,0 +1,213 @@
+---
+import Icon from './Icon.astro';
+import { site, hours } from '../data/site';
+
+const { lat, lon } = site.geo;
+const bbox = [lon - 0.008, lat - 0.004, lon + 0.008, lat + 0.004].map((n) => n.toFixed(4)).join('%2C');
+const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lon}`;
+const mapLink = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`;
+const week = [...hours.slice(1), hours[0]];
+---
+
+<section class="contact brick section" id="kontakt" aria-labelledby="contact-title">
+  <h2 id="contact-title" class="painted bleed wall-title">Kontakt</h2>
+  <div class="wrap contact__grid">
+    <div class="contact__info">
+      <address class="contact__addr">
+        <p class="contact__street">{site.street}</p>
+        <p>{site.postal} {site.city}, {site.district}</p>
+        <p class="contact__lines">
+          <a href={site.phoneHref}><Icon name="phone" />{site.phone}</a>
+          <a href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a>
+        </p>
+        <p class="contact__how">Wejście od podwórza dawnej przędzalni, 6 minut pieszo od przystanku Przędzalniana/Tymienieckiego.</p>
+      </address>
+
+      <div class="hours">
+        <h3>Godziny otwarcia</h3>
+        <table>
+          <caption class="visually-hidden">Godziny otwarcia w poszczególne dni</caption>
+          <tbody>
+            {
+              week.map((d) => (
+                <tr data-day={hours.indexOf(d)}>
+                  <th scope="row">{d.label}</th>
+                  <td>
+                    {d.open} – {d.close}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+        <p class="note">Kuchnia przyjmuje ostatnie zamówienia 30 minut przed zamknięciem.</p>
+      </div>
+    </div>
+
+    <div class="map">
+      <div class="map__frame">
+        <div class="map__poster" aria-hidden="true">
+          <p class="map__poster-street">{site.street}</p>
+          <p>Księży Młyn, Łódź. Mapa ładuje się z OpenStreetMap.</p>
+        </div>
+        <iframe title="Mapa dojazdu do pizzerii Przędza, ul. Przędzalniana 68 w Łodzi" src={mapSrc} loading="lazy" referrerpolicy="no-referrer"></iframe>
+      </div>
+      <a class="btn map__btn" href={mapLink} rel="noopener" target="_blank"><Icon name="mapPin" />Otwórz mapę i wyznacz trasę</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact__grid {
+    display: grid;
+    gap: var(--c3) var(--c4);
+  }
+
+  .contact__info {
+    display: grid;
+    gap: var(--c2);
+    align-content: start;
+  }
+
+  .contact__addr,
+  .hours {
+    padding: var(--c1) clamp(1.25rem, 3vw, 2rem);
+    background: var(--soot);
+    font-style: normal;
+  }
+
+  .contact__addr {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .contact__street {
+    font-family: var(--sign);
+    font-size: 2.25rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .contact__lines {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .contact__lines a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    font-weight: 700;
+  }
+
+  .contact__how {
+    margin-top: 0.25rem;
+    color: var(--on-dark-soft);
+    max-width: 44ch;
+  }
+
+  .hours h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hours table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hours th,
+  .hours td {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--soot-2);
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .hours td {
+    text-align: right;
+  }
+
+  .hours tr[data-today] th,
+  .hours tr[data-today] td {
+    font-weight: 700;
+    color: var(--ochre);
+  }
+
+  .hours tr[data-today] th::after {
+    content: ' · dziś';
+  }
+
+  .hours .note {
+    margin-top: 0.75rem;
+    color: var(--on-dark-soft);
+  }
+
+  .map {
+    display: grid;
+    gap: var(--c1);
+    align-content: start;
+  }
+
+  .map__frame {
+    position: relative;
+    border: 0.625rem solid var(--iron);
+    box-shadow: 0 0.75rem 1.5rem -0.75rem rgb(26 21 18 / 0.6);
+    background: var(--lime);
+  }
+
+  .map__poster {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    gap: 0.25rem;
+    padding: var(--c1);
+    text-align: center;
+    color: var(--ink-soft);
+  }
+
+  .map__poster-street {
+    font-family: var(--sign);
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .map__frame iframe {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: clamp(20rem, 55vh, 34rem);
+    border: 0;
+  }
+
+  .map__btn {
+    justify-self: start;
+  }
+
+  @media (min-width: 60rem) {
+    .contact__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    }
+
+  }
+
+  @media (max-width: 30rem) {
+    .map__btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  const day = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Warsaw', weekday: 'short' }).format(new Date());
+  const idx = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(day);
+  document.querySelector(`.hours tr[data-day="${idx}"]`)?.setAttribute('data-today', '');
+</script>
